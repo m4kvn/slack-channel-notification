@@ -28,7 +28,7 @@ $ slack-channel-notification
 #### Example 3: using docker
 
 ```
-$ docker run -itd --name slack-channel-notification -e SLACK_USER_TOKEN=xxxxxx-xxxxxxxxx hashibiroko/slack-channel-notification
+$ docker run -itd --name slack-channel-notification -e SLACK_BOT_TOKEN=xxxxxx-xxxxxxxxx hashibiroko/slack-channel-notification
 ```
 
 ### Flags
