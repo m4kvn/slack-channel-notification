@@ -1,0 +1,6 @@
+.gitignore
+Dockerfile
+Gopkg.lock
+Gopkg.toml
+LICENSE
+README.md
