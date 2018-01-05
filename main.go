@@ -55,12 +55,12 @@ func postMessage(api *slack.Client, ev *slack.ChannelCreatedEvent, flags Flag) {
 		channel, _ := api.GetChannelInfo(ev.Channel.ID)
 		attachment := slack.Attachment{
 			Color: "good",
-			Text: fmt.Sprintf("New channel <#%s> has been created by <@%s>\n",
-				channel.ID, channel.Creator),
+			Text: fmt.Sprintf("<@%s> さんが新しいチャンネル <#%s> を作成したよ！\n",
+				channel.Creator, channel.ID),
 		}
 		if channel.Purpose.Value != "" {
 			attachment.Fields = []slack.AttachmentField{{
-				Title: "Purpose",
+				Title: "目的",
 				Value: channel.Purpose.Value,
 			}}
 		}
