@@ -53,17 +53,20 @@ func postMessage(api *slack.Client, ev *slack.ChannelCreatedEvent, flags Flag) {
 	go func() {
 		time.Sleep(flags.Delay)
 		channel, _ := api.GetChannelInfo(ev.Channel.ID)
+		attachment := slack.Attachment{
+			Color: "good",
+			Text: fmt.Sprintf("New channel <#%s> has been created by <@%s>\n",
+				channel.ID, channel.Creator),
+		}
+		if channel.Purpose.Value != "" {
+			attachment.Fields = []slack.AttachmentField{{
+				Title: "Purpose",
+				Value: channel.Purpose.Value,
+			}}
+		}
 		params := slack.PostMessageParameters{
 			AsUser: true,
-			Attachments: []slack.Attachment{{
-				Color: "good",
-				Fields: []slack.AttachmentField{{
-					Title: "Purpose",
-					Value: channel.Purpose.Value,
-				}},
-				Text: fmt.Sprintf("New channel <#%s> has been created by <@%s>\n",
-					channel.ID, channel.Creator),
-			}},
+			Attachments: []slack.Attachment{attachment},
 		}
 		if flags.ChannelId != "" {
 			api.PostMessage(flags.ChannelId, "", params)
